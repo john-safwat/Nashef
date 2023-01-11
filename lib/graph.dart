@@ -127,10 +127,10 @@ class Graph extends StatelessWidget {
           P = Y * pow(e , (((2*MU) / HF) * ((B / 2) + i)));
         }
         else if(i<0 && i>-XTRANSITION) {
-          P = Y * (1 + (1 / HF) * (B / 2 + i));
+          P = ((Y)*(HF + ((2*MU)*(XTRANSITION+i))))/(2* MU*HF);
         }
         else if(i>0 && i<XTRANSITION){
-          P = Y * (1 + (1 / HF) * (B / 2 - i));
+          P = ((Y)*(HF + ((2*MU)*(XTRANSITION-i))))/(2* MU*HF);
         }
         else {
           P = Y * pow(e , (((2*MU) / HF) * ((B / 2) - i)));
@@ -152,7 +152,6 @@ class Graph extends StatelessWidget {
     Pavg = data.Pavg;
     XTRANSITION = data.XTRANSITION;
     no_points = data.no_point;
-    print(no_points);
   }
 }
 

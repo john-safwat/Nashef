@@ -509,13 +509,10 @@ class _CalcScreenState extends State<CalcScreen> {
       Pavg = ((Y * HF) / (MU * B)) * (pow(e , ((MU * B)/HF))-1);
     }
     else if (CaseCheckIndex() == 2){
-      Pmax = Y * (1 + (B / (2 * HF)));
-      SimpsonRule Function1 = SimpsonRule(function: '1 + ( 1 / $HF ) * ( ( $B / 2 ) - x )', lowerBound: 0, upperBound: XTRANSITION());
-      SimpsonRule Function2 = SimpsonRule(function: 'e ^ ( (($MU * 2) / $HF )* (( $B / 2 ) - x ))', lowerBound: XTRANSITION(), upperBound: B/2);
-      print ("${Function1.integrate().result}");
-      print ("${Function2.integrate().result}");
-      Pavg = ( Y /( B/2 ))* (Function1.integrate().result + Function2.integrate().result);
-      print (Pavg);
+      Pmax = ((Y)*(HF + ((2*MU)*(XTRANSITION()))))/(2* MU*HF);
+      SimpsonRule Function1 = SimpsonRule(function: '( 1 /($MU * 2)) + ( ((${XTRANSITION()} - x)/ $HF ))', lowerBound: 0, upperBound: XTRANSITION());
+      SimpsonRule Function2 = SimpsonRule(function: 'e^((($MU * 2) / $HF )* (($B / 2 ) - x ))', lowerBound: XTRANSITION(), upperBound: B/2);
+      Pavg = ((Y)*(Function1.integrate().result / XTRANSITION()))+((Y/((B/2)-XTRANSITION()))*Function2.integrate().result);
     }
   }
 }
@@ -547,3 +544,9 @@ class attributes {
     required this.no_point
   });
 }
+
+//SimpsonRule Function1 = SimpsonRule(function: '( 1 /($MU * 2)) + ( ( $XTRANSITION -x / HF ))', lowerBound: 0, upperBound: XTRANSITION());
+//SimpsonRule Function2 = SimpsonRule(function: 'e ^ ( (($MU * 2) / $HF )* (( $B / 2 ) - x ))', lowerBound: XTRANSITION(), upperBound: B/2);
+//Pavg = ((Y/HF)F1 + (Y/((B/2)-$XTRANSITION)F2)
+//       print ("${Function1.integrate().result}");
+//       print ("${Function2.integrate().result}");
